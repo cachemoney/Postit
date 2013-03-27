@@ -1,0 +1,12 @@
+<h1>All Posts</h1>
+<ul>
+	<% @posts.each do |post| %>
+		<div class='span8 well'>
+			<h5><%= link_to post.title, fix_url(post.url) %></h5>
+			by <%= link_to post.user.username, user_path(post.user) %>
+		</div>
+
+	<% end %>
+</ul>
+
+

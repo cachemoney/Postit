@@ -1,0 +1,29 @@
+<h3><%= @post.title %></h3>
+<h5>written by <%=@post.user.username %></h5>
+<br />
+<%= @post.body %>
+<br />
+<br />
+<hr>
+<%# using brackets, since this is a nested resource%>
+	<%= form_for [@post, @comment] do |f| %>
+	<%= render 'shared/errors', obj: @comment %>
+
+	<%= f.label :body %>
+	<%= f.text_area :body, rows: 5 %> <br />
+	<%= f.submit "Create Comment", class:"btn btn-success" %> <br />
+	<% end %>
+<br />
+<br />
+
+<h4>Comments</h4>
+<ul>
+	<%# reload is used b/c we created an empty object in the controller. this will just access items in the DB (excluding the one in memory)%>
+	<% @post.comments.reload.each do |comment| %>
+		<li> 
+			<%= comment.body %> 
+			by 
+			<%= comment.user.username %>
+		</li>
+	<% end %>
+</ul>
