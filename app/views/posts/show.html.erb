@@ -1,7 +1,7 @@
-<h3><%= @post.title %></h3>
+<h3><%= link_to @post.title, fix_url(@post.url) %></h3>
 <h5>written by <%=@post.user.username %></h5>
 <br />
-<%= @post.body %>
+<%= @post.description %>
 <br />
 <br />
 <hr>

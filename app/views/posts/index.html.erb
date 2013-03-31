@@ -3,7 +3,8 @@
 	<% @posts.each do |post| %>
 		<div class='span8 well'>
 			<h5><%= link_to post.title, fix_url(post.url) %></h5>
-			by <%= link_to post.user.username, user_path(post.user) %>
+			by <%= link_to post.user.username, user_path(post.user) %> <br />
+			view <%= link_to post.comments.size.to_s + ' comments', post_path(post)%>
 		</div>
 
 	<% end %>
