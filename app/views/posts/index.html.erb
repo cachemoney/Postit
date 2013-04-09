@@ -1,13 +1,5 @@
-<h1>All Posts</h1>
-<ul>
-	<% @posts.each do |post| %>
-		<div class='span8 well'>
-			<h5><%= link_to post.title, fix_url(post.url) %></h5>
-			by <%= link_to post.user.username, user_path(post.user) %> <br />
-			view <%= link_to post.comments.size.to_s + ' comments', post_path(post)%>
-		</div>
+<%= render 'shared/content_lead', header: 'All Posts' %>
 
-	<% end %>
-</ul>
-
-
+<% @posts.each do |post| %>
+	<%= render 'post', post: post %>
+<% end %>

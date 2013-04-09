@@ -1,0 +1,27 @@
+<div class="row">
+	<div class='span0 well text-center' id="vote_box_for_post_<%=post.id%>" >
+		<% if logged_in? && !current_user.already_voted_on_post?(post) %>
+			<%= link_to "+", vote_post_path(post, vote: true), method: 'post', remote: true %>
+			<% end %>
+		<span id="post_<%=post.id%>_votes"> <%= post.total_votes %> </span>
+		<% if logged_in? && !current_user.already_voted_on_post?(post) %>
+			<%= link_to "-", vote_post_path(post, vote: false), method: 'post', remote: true %>
+		<% end %>	
+	</div>
+	<div class='span8 well'>
+
+		<h4><%= link_to post.title, fix_url(post.url) %></h4>
+		<p>
+			<%= post.description %>
+		</p>
+		<p>
+			<span class="quiet">posted by</span> <%= link_to post.user.username, user_path(post.user) %>
+			
+		</p>
+		<small>
+			<span>
+				<%= link_to("#{post.comments.size} comments", post_path(post)) %>
+			</span>
+		</small>
+	</div>
+</div>

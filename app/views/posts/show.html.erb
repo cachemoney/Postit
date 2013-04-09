@@ -1,5 +1,13 @@
 <h3><%= link_to @post.title, fix_url(@post.url) %></h3>
+<small>
+	<% if logged_in? %>
+		<% if current_user.id == @post.user.id %>
+			<%= link_to "Edit Post", edit_post_path(@post) %>
+		<% end %>
+	<% end %>
+</small>
 <h5>written by <%=@post.user.username %></h5>
+
 <br />
 <%= @post.description %>
 <br />
@@ -14,16 +22,20 @@
 	<%= f.submit "Create Comment", class:"btn btn-success" %> <br />
 	<% end %>
 <br />
+<h5>
+	Category:  
+	<% @categories.each do |category| %>
+		<%= link_to category.title, category_path(category) %>
+
+
+	<% end %>
+</h5>
 <br />
 
 <h4>Comments</h4>
 <ul>
 	<%# reload is used b/c we created an empty object in the controller. this will just access items in the DB (excluding the one in memory)%>
 	<% @post.comments.reload.each do |comment| %>
-		<li> 
-			<%= comment.body %> 
-			by 
-			<%= comment.user.username %>
-		</li>
+  	<%= render 'comments/comment', comment: comment %>
 	<% end %>
 </ul>

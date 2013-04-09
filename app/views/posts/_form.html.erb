@@ -12,5 +12,11 @@
 		<%= f.label :description %>
 		<%= f.text_area :description, rows: 5  %>
 	</div>
+
+		<div class='cotrol-group'>
+		<%= f.label :category_ids, "Categories" %>
+		<%= f.select :category_ids, Category.all.collect{|c| [c.title, c.id ]}, {}, {multiple: 'multiple'} %>
+	</div>
+
 	<%= f.submit(@post.new_record? ? "Create Post" : "Update Post", class: 'btn btn-primary') %>
 	<% end %>
